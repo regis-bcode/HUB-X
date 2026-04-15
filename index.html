@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVP | Hub Inteligente de Matching Empresarial B2B</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a33;
+      --panel-2: #17213f;
+      --text: #f4f7fb;
+      --muted: #aeb9cf;
+      --line: #2a375f;
+      --accent: #62d6ff;
+      --accent-2: #9df4c8;
+      --warn: #ffd36e;
+      --danger: #ff8a8a;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(98, 214, 255, .18), transparent 32%),
+        radial-gradient(circle at top right, rgba(157, 244, 200, .12), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    header {
+      padding: 72px 7vw 56px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1.02;
+      max-width: 1100px;
+      margin: 18px 0 22px;
+    }
+
+    .subtitle {
+      max-width: 860px;
+      color: var(--muted);
+      font-size: 20px;
+    }
+
+    .hero-grid {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .metric, .card, .module, .risk, .phase {
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.18);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 28px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11,16,32,.86);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 7vw;
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    section {
+      padding: 64px 7vw;
+      border-bottom: 1px solid rgba(42,55,95,.6);
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 46px);
+      margin: 0 0 18px;
+    }
+
+    .section-lead {
+      max-width: 850px;
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      color: var(--accent-2);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 13px;
+      margin: 5px 6px 5px 0;
+      background: rgba(157,244,200,.06);
+    }
+
+    .card h3, .module h3, .risk h3, .phase h3 {
+      margin-top: 0;
+      font-size: 21px;
+    }
+
+    ul { padding-left: 20px; color: var(--muted); }
+    li { margin: 7px 0; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(170px, 1fr));
+      gap: 14px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .step {
+      min-height: 160px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      position: relative;
+    }
+
+    .step span {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: rgba(98,214,255,.14);
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .highlight {
+      border-color: rgba(98,214,255,.55);
+      background: linear-gradient(180deg, rgba(98,214,255,.11), rgba(255,255,255,.025));
+    }
+
+    .warning { color: var(--warn); }
+    .danger { color: var(--danger); }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .footer {
+      padding: 44px 7vw;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .grid-2, .grid-3, .matrix, .roadmap {
+        grid-template-columns: 1fr;
+      }
+      header, section, .footer { padding-left: 24px; padding-right: 24px; }
+      nav { padding-left: 24px; padding-right: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">MVP EXECUTIVO · HUB INTELIGENTE B2B</div>
+    <h1>Motor de Matching entre dores empresariais e parceiros de tecnologia</h1>
+    <p class="subtitle">Uma plataforma operacional para capturar demandas, qualificar necessidades, ranquear parceiros, governar oportunidades e monetizar fechamentos com rastreabilidade comercial.</p>
+    <div class="hero-grid">
+      <div class="metric"><strong>Não é clube</strong><span>É uma operação de intermediação inteligente.</span></div>
+      <div class="metric"><strong>Não é lead solto</strong><span>É demanda qualificada com contexto, score e trilha.</span></div>
+      <div class="metric"><strong>Não é networking</strong><span>É governança de oportunidade até fechamento.</span></div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#tese">Tese</a>
+    <a href="#problema">Problema</a>
+    <a href="#modulos">Módulos</a>
+    <a href="#fluxo">Fluxo</a>
+    <a href="#matching">Matching</a>
+    <a href="#bypass">Anti-bypass</a>
+    <a href="#monetizacao">Monetização</a>
+    <a href="#stack">Stack</a>
+    <a href="#kpis">KPIs</a>
+    <a href="#roadmap">Roadmap</a>
+  </nav>
+
+  <section id="tese">
+    <h2>Tese do negócio</h2>
+    <p class="section-lead">A plataforma cria uma camada de inteligência e governança entre empresas com problemas reais e fornecedores capazes de resolver esses problemas.</p>
+    <div class="grid-3">
+      <div class="card highlight">
+        <h3>Cliente</h3>
+        <ul>
+          <li>Expõe uma dor de negócio ou tecnologia.</li>
+          <li>Recebe diagnóstico objetivo e curadoria.</li>
+          <li>Reduz risco de contratar fornecedor errado.</li>
+        </ul>
+      </div>
+      <div class="card highlight">
+        <h3>Parceiro</h3>
+        <ul>
+          <li>Recebe oportunidade qualificada.</li>
+          <li>Reduz CAC e dispersão comercial.</li>
+          <li>Foca em leads com maior aderência.</li>
+        </ul>
+      </div>
+      <div class="card highlight">
+        <h3>Hub</h3>
+        <ul>
+          <li>Controla origem, trilha e evolução.</li>
+          <li>Monetiza por comissão e revenue share.</li>
+          <li>Constrói base de dados proprietária.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="problema">
+    <h2>Problema de mercado</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Lado cliente</h3>
+        <ul>
+          <li>Não sabe traduzir dor em escopo técnico.</li>
+          <li>Tem dificuldade para avaliar fornecedores.</li>
+          <li>Perde tempo com reuniões improdutivas.</li>
+          <li>Assume risco alto em contratação de tecnologia.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Lado fornecedor</h3>
+        <ul>
+          <li>Recebe leads frios e mal contextualizados.</li>
+          <li>Gasta energia em prospecção de baixo fit.</li>
+          <li>Tem CAC elevado.</li>
+          <li>Não possui previsibilidade de pipeline.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="modulos">
+    <h2>Módulos obrigatórios do MVP</h2>
+    <p class="section-lead">O MVP precisa validar geração de demanda, qualidade do match, conversão comercial e captura de receita. Para isso, seis módulos são mandatórios.</p>
+    <div class="grid-3">
+      <div class="module"><h3>1. Intake da demanda</h3><ul><li>Dados da empresa.</li><li>Descrição da dor.</li><li>Urgência, orçamento, prazo e impacto.</li></ul></div>
+      <div class="module"><h3>2. Diagnóstico com IA</h3><ul><li>Resumo executivo.</li><li>Classificação da dor.</li><li>Score de maturidade e potencial.</li></ul></div>
+      <div class="module"><h3>3. Base de parceiros</h3><ul><li>Especialidades.</li><li>Ticket, SLA e capacidade.</li><li>Cases, reputação e aceite contratual.</li></ul></div>
+      <div class="module"><h3>4. Motor de matching</h3><ul><li>Ranqueamento por aderência.</li><li>Top 3 parceiros.</li><li>Justificativa do match.</li></ul></div>
+      <div class="module"><h3>5. Governança</h3><ul><li>ID único da oportunidade.</li><li>Status comercial.</li><li>Logs, evidências e timestamps.</li></ul></div>
+      <div class="module"><h3>6. Monetização</h3><ul><li>Comissão por fechamento.</li><li>Revenue share de MRR.</li><li>Plano premium para parceiros.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="fluxo">
+    <h2>Fluxo operacional do MVP</h2>
+    <div class="flow">
+      <div class="step"><span>1</span><h3>Entrada</h3><p>Cliente informa dor, contexto, urgência, orçamento e prazo.</p></div>
+      <div class="step"><span>2</span><h3>Diagnóstico</h3><p>IA resume, categoriza e gera score da demanda.</p></div>
+      <div class="step"><span>3</span><h3>Curadoria</h3><p>Operador homologa a demanda e valida qualidade.</p></div>
+      <div class="step"><span>4</span><h3>Matching</h3><p>Sistema ranqueia parceiros por aderência.</p></div>
+      <div class="step"><span>5</span><h3>Aceite</h3><p>Parceiro aceita termos antes de receber dados completos.</p></div>
+      <div class="step"><span>6</span><h3>Reunião</h3><p>Primeiro contato é mediado e registrado.</p></div>
+      <div class="step"><span>7</span><h3>Receita</h3><p>Proposta, fechamento e comissão são apurados.</p></div>
+    </div>
+  </section>
+
+  <section id="matching">
+    <h2>Motor de matching</h2>
+    <p class="section-lead">O algoritmo inicial deve ser simples, auditável e ajustável. No MVP, a IA recomenda e o operador decide.</p>
+    <div class="matrix">
+      <div class="card"><h3>Critérios</h3><ul><li>Segmento do cliente</li><li>Tipo de problema</li><li>Ticket compatível</li><li>SLA e capacidade</li><li>Reputação histórica</li></ul></div>
+      <div class="card"><h3>Peso sugerido</h3><ul><li>Problema: 25%</li><li>Segmento: 20%</li><li>Ticket: 15%</li><li>Performance: 15%</li><li>SLA/reputação: 25%</li></ul></div>
+      <div class="card"><h3>Resultado</h3><ul><li>Top 3 parceiros</li><li>Score final</li><li>Justificativa do match</li><li>Riscos de aderência</li></ul></div>
+    </div>
+  </section>
+
+  <section id="bypass">
+    <h2>Modelo anti-bypass</h2>
+    <p class="section-lead">Não existe blindagem total contra desintermediação. O MVP precisa reduzir incentivo, aumentar rastreabilidade e criar consequência operacional.</p>
+    <div class="grid-3">
+      <div class="risk"><h3>Contrato</h3><ul><li>Termo de intermediação.</li><li>Comissão formalizada.</li><li>Janela de proteção de 12 meses.</li></ul></div>
+      <div class="risk"><h3>Trilha</h3><ul><li>ID único da oportunidade.</li><li>Aceite com data e hora.</li><li>Reunião e proposta registradas.</li></ul></div>
+      <div class="risk"><h3>Incentivo</h3><ul><li>Parceiro correto recebe mais leads.</li><li>Bypass reduz score.</li><li>Reincidência gera bloqueio.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="monetizacao">
+    <h2>Modelo de monetização</h2>
+    <div class="grid-2">
+      <div class="card highlight">
+        <h3>Receitas principais</h3>
+        <ul>
+          <li>Comissão de 5% a 12% sobre contrato fechado.</li>
+          <li>Revenue share sobre MRR em contratos SaaS por 6 a 12 meses.</li>
+          <li>Plano premium para parceiros com prioridade e analytics.</li>
+          <li>Diagnóstico pago para clientes enterprise.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Regra executiva</h3>
+        <ul>
+          <li>Não cobrar por networking genérico.</li>
+          <li>Cobrar por valor gerado e oportunidade convertida.</li>
+          <li>Preservar entrada gratuita para aumentar oferta e demanda.</li>
+          <li>Monetizar onde há prova de origem e fechamento.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <h2>Stack tecnológica inicial</h2>
+    <p class="section-lead">A primeira versão deve ser concierge, semi-manual e com automação leve. Produto robusto só depois de validar conversão e receita.</p>
+    <div>
+      <span class="tag">Landing: Webflow / Framer / WordPress</span>
+      <span class="tag">Forms: Tally / Typeform / Google Forms</span>
+      <span class="tag">Banco: Airtable / Baserow / Supabase</span>
+      <span class="tag">CRM: HubSpot / Pipedrive</span>
+      <span class="tag">Automação: n8n / Make / Zapier</span>
+      <span class="tag">IA: classificação, resumo e score</span>
+      <span class="tag">Agenda: Calendly</span>
+      <span class="tag">BI: Looker Studio / Airtable Interface</span>
+    </div>
+  </section>
+
+  <section id="kpis">
+    <h2>KPIs de validação</h2>
+    <div class="grid-3">
+      <div class="card"><h3>Aquisição</h3><ul><li>Demandas recebidas</li><li>Origem das demandas</li><li>Custo por demanda</li><li>% demandas qualificadas</li></ul></div>
+      <div class="card"><h3>Conversão</h3><ul><li>% aceite parceiro</li><li>% reunião realizada</li><li>% proposta enviada</li><li>% fechamento</li></ul></div>
+      <div class="card"><h3>Receita e risco</h3><ul><li>Ticket médio</li><li>Comissão média</li><li>MRR originado</li><li>Taxa de bypass suspeito</li></ul></div>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <h2>Roadmap de implantação</h2>
+    <div class="roadmap">
+      <div class="phase"><h3>Semana 1</h3><ul><li>Definir ICP.</li><li>Selecionar verticais.</li><li>Fechar regras comerciais.</li><li>Mapear 10–20 parceiros.</li></ul></div>
+      <div class="phase"><h3>Semana 2</h3><ul><li>Criar landing page.</li><li>Configurar formulários.</li><li>Montar CRM.</li><li>Estruturar base de dados.</li></ul></div>
+      <div class="phase"><h3>Semana 3</h3><ul><li>Automatizar alertas.</li><li>Configurar IA de diagnóstico.</li><li>Criar dashboard.</li><li>Testar fluxo completo.</li></ul></div>
+      <div class="phase"><h3>Semana 4–12</h3><ul><li>Rodar piloto.</li><li>Medir funil.</li><li>Ajustar matching.</li><li>Validar monetização.</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Critérios de sucesso do piloto</h2>
+    <div class="grid-2">
+      <div class="card highlight">
+        <h3>Meta operacional</h3>
+        <ul>
+          <li>20 a 50 demandas qualificáveis.</li>
+          <li>60% ou mais de qualificação.</li>
+          <li>40% ou mais de demandas qualificadas virando reuniões.</li>
+          <li>20% ou mais das reuniões gerando proposta.</li>
+        </ul>
+      </div>
+      <div class="card highlight">
+        <h3>Meta financeira</h3>
+        <ul>
+          <li>1 a 3 negócios fechados no piloto.</li>
+          <li>Comissão efetivamente capturada.</li>
+          <li>Taxa de bypass sob controle.</li>
+          <li>Prova de unit economics positiva.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <strong>Conclusão executiva:</strong> o MVP é viável se for tratado como operação de intermediação inteligente, com curadoria, diagnóstico, matching e governança de transação. O erro estratégico seria começar como rede social empresarial ou marketplace aberto antes de validar captura de receita.
+  </div>
+</body>
+</html>
